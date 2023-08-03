@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="app-title">User List</h1>
+          <h1 className="app-title">User Rolodex</h1>
           <SearchBox
             className="user-search-box"
             placeholder="Search user"

@@ -17,3 +17,10 @@ body {
   color: #0ccac4;
   font-family: 'Special Elite';
 }
+
+@media only screen and (max-width: 600px) {
+  .app-title {
+    margin: 38px 0 25px;
+    font-size: 38px;
+  }
+}

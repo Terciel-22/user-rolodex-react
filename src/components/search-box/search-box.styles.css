@@ -1,10 +1,16 @@
 .search-box {
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 150px;
-    line-height: 30px;
-    margin-bottom: 30px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  width: 150px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .search-box {
+    width: 200px;
   }
+}
