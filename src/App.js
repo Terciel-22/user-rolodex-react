@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Component } from "react";
+import SearchBox from "./components/search-box/SearchBox";
+import CardList from "./components/card-list/CardList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      users: [],
+      isLoading: true,
+      searchString: "",
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://dummyjson.com/users?limit=10").then((res) =>
+      res.json().then((res) =>
+        this.setState({
+          users: res.users,
+          isLoading: false,
+        })
+      )
+    );
+  }
+
+  onSearchChange = (e) => {
+    const searchString = e.target.value.toLowerCase();
+    this.setState(() => {
+      return { searchString };
+    });
+  };
+
+  render() {
+    const { users, isLoading, searchString } = this.state;
+    const { onSearchChange } = this;
+
+    const filteredUsers = users.filter((user) => {
+      const fullName =
+        user.firstName.toLocaleLowerCase() + user.lastName.toLocaleLowerCase();
+      return fullName.includes(searchString);
+    });
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1 className="app-title">User List</h1>
+          <SearchBox
+            className="user-search-box"
+            placeholder="Search user"
+            onChangeHandler={onSearchChange}
+          />
+
+          <CardList users={filteredUsers} isLoading={isLoading} />
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
